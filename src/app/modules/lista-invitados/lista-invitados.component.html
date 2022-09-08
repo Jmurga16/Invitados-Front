@@ -1,0 +1,72 @@
+<!--Titulo-->
+<div class="header-app" style="margin-top:1rem;">
+    <h1 style=" font-weight: bold;">{{sTitulo}}</h1>
+</div>
+
+<!--Zona de botones flotantes-->
+<div class="fab-container">
+    <div>
+        <button matTooltipPosition="left" mat-raised-button mat-mini-fab class="fab-secondary" color="primary"
+            matTooltip="Agregar Usuario" (click)="fnAgregar()">
+            <span class="material-icons">add</span>
+        </button>
+        <button matTooltipPosition="left" mat-raised-button mat-mini-fab class="fab-secondary" color="accent"
+            matTooltip="Descargar Excel" (click)="exporter.exportTable('xlsx', {fileName:'ListaInvitados'})">
+            <span class="material-icons">cloud_download</span>
+        </button>
+    </div>
+</div>
+
+<!--Filtro-->
+<div class="form row">
+    <div class="col-md-6">
+        <mat-form-field appearance="standard" style="width: 90%;">
+            <mat-label>Buscar Invitado</mat-label>
+            <input matInput (keyup)="applyFilter($event)" [formControl]="txtFiltro" #input>
+            <button style="outline: none;" *ngIf="txtFiltro.value" mat-button matSuffix mat-icon-button
+                aria-label="Clear" (click)="fnClearFilter()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+</div>
+
+<!--Boton: Tabla-->
+<div class="example-container mat-elevation-z8 ">
+    <table mat-table [dataSource]="dataSource" matSort style="width: 100%;" aria-describedby="TablaUsuario"
+        matTableExporter #exporter="matTableExporter">
+
+        <!-- Codigo -->
+        <ng-container matColumnDef="sDNI">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="clsColumnDNI" id="DNI"> DNI </th>
+            <td mat-cell *matCellDef="let element"> {{element.sDNI}} </td>
+        </ng-container>
+
+        <!-- Nombre -->
+        <ng-container matColumnDef="sNombrePersona">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="clsColumnNombre" id="Nombre"> Nombre </th>
+            <td mat-cell *matCellDef="let element"> {{element.sNombrePersona}} </td>
+        </ng-container>
+
+        <!--Acciones: Editar/Eliminar/Activar-->
+        <!-- <ng-container matColumnDef="Acciones">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="clsColumnaId" id="Accion"> Acciones </th>
+            <td mat-cell *matCellDef="let element">
+                <div class="example-button-row " *ngIf="element.nIdUsuario!=1">
+                    <button mat-raised-button color="accent" style="margin-right: 8px;"
+                        (click)="fnAbrirModal(1,element.nIdUsuario)">Editar</button>
+                    <button *ngIf="element.sEstado=='Activo'" mat-raised-button color="warn"
+                        (click)="fnCambiarEstado(element.nIdUsuario,0)">Eliminar</button>
+                    <button *ngIf="element.sEstado=='Inactivo'" mat-raised-button class="buttonActive"
+                        (click)="fnCambiarEstado(element.nIdUsuario,1)">Activar</button>
+                </div>
+
+            </td>
+        </ng-container> -->
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <!--Mat Paginator-->
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+</div>
