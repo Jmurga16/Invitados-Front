@@ -18,9 +18,11 @@ export class ListaInvitadosComponent implements OnInit {
   txtFiltro = new FormControl();
   sTitulo: string = "";
   dataSource: MatTableDataSource<any>;
+
   displayedColumns: string[] = [
     'sDNI',
-    'sNombrePersona'
+    'sNombrePersona',
+    //'Acciones'
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -39,11 +41,8 @@ export class ListaInvitadosComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.fnListInvitados();
 
-    
-
-
-    //this.fnListInvitados();
   }
 
   //#region Ruta Agregar
@@ -97,8 +96,12 @@ export class ListaInvitadosComponent implements OnInit {
   }
   //#endregion
 
+  fnCambiarEstado(idPersona: number, estado: number) {
 
-  
+  }
+  fnEditar(idPersona: number, estado: number) {
+
+  }
 
 
 }

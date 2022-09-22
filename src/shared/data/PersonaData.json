@@ -1,0 +1,20 @@
+[
+    {
+        "nIdPersona": 1,
+        "sDNI": "70862638",
+        "sNombrePersona": "GOYA ACUÑA, JUAN CARLOS",
+        "sApellidoPaterno": "GOYA",
+        "sApellidoMaterno": "ACUÑA",
+        "sNombre": "JUAN CARLOS",
+        "bEstado": true
+    },
+    {
+        "nIdPersona": 1,
+        "sDNI": "70862638",
+        "sNombrePersona": "GOYA ACUÑA, RANDOLPH ABEL",
+        "sApellidoPaterno": "FUENTES",
+        "sApellidoMaterno": "ZERON",
+        "sNombre": "RANDOLPH ABEL",
+        "bEstado": true
+    }
+]

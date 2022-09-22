@@ -1,0 +1,31 @@
+[
+    {
+        "idMenu": 1,
+        "name": "Lista de Invitados",
+        "route": "invitados",
+        "icon": "groups",
+        "idParent": 0,
+        "level": 1,
+        "show": false,
+        "status": true,
+        "subMenu": {
+            "idMenu": 3,
+            "name": "Invitados Especiales",
+            "route": "mantenimiento",
+            "icon": "settings",
+            "idParent": 1,
+            "level": 2,
+            "show": false,
+            "status": true
+        }
+    },
+    {
+        "idMenu": 2,
+        "name": "Mantenimiento",
+        "route": "mantenimiento",
+        "icon": "settings",
+        "idParent": 0,
+        "show": false,
+        "status": true
+    }
+]

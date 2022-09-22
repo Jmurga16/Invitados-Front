@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MenuService } from 'src/app/services/menu.service';
 import { PersonaService } from 'src/app/services/persona.service';
 import Swal from 'sweetalert2';
 
@@ -16,20 +17,19 @@ export class FormInvitadosComponent implements OnInit {
 
   sTitulo: string = "";
   nIdPersona: number = 0;
-
   formPersona: FormGroup;
 
   formUsuario = new FormControl();
   formPassword = new FormControl();
-  UsuarioValido: boolean = false;
+  UsuarioValido: boolean = true; //false
 
-  listTipoInvitado = [
-    { Id: 1, Descripcion: "Invitado" },
-    { Id: 2, Descripcion: "Graduado" }
-  ]
+  modeDemo: boolean = true;
+
 
   constructor(
     private personaService: PersonaService,
+    private menuService: MenuService,
+
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -44,8 +44,6 @@ export class FormInvitadosComponent implements OnInit {
       'sApellidoMaterno': ['', Validators.required],
       'sNombre': ['', Validators.required],
       'sNombrePersona': [{ value: '', disabled: true }, Validators.required],
-      'nTipoPersona': [1, Validators.required],
-      'nMontoPagado': [30, Validators.required],
 
       'bEstado': ['']
 
@@ -62,6 +60,11 @@ export class FormInvitadosComponent implements OnInit {
     } else {
       this.mobile = false;
     }
+
+
+    this.menuService.demo$.subscribe(demo => {
+      this.modeDemo = demo;
+    })
 
   }
 
@@ -115,14 +118,12 @@ export class FormInvitadosComponent implements OnInit {
 
 
     let pParametro = [];
-    let nOpcion = this.nIdPersona == 0 ? 4 : 5; // 3-> Insertar / 4-> Editar
+    let nOpcion = this.nIdPersona == 0 ? 3 : 4; // 3-> Insertar / 4-> Editar
 
     pParametro.push(this.formPersona.controls["sDNI"].value);
     pParametro.push(this.formPersona.controls["sApellidoPaterno"].value);
     pParametro.push(this.formPersona.controls["sApellidoMaterno"].value);
     pParametro.push(this.formPersona.controls["sNombre"].value);
-    pParametro.push(this.formPersona.controls["nTipoPersona"].value);
-    pParametro.push(this.formPersona.controls["nMontoPagado"].value);
     pParametro.push(this.formPersona.controls["nIdPersona"].value);
 
     await this.personaService.fnServicePersona(nOpcion, pParametro).subscribe({
@@ -191,7 +192,7 @@ export class FormInvitadosComponent implements OnInit {
   async fnLogin() {
 
     let pParametro = [];
-    let nOpcion = 7
+    let nOpcion = 6
 
     pParametro.push(this.formUsuario.value);
     pParametro.push(this.formPassword.value);
@@ -228,15 +229,13 @@ export class FormInvitadosComponent implements OnInit {
       this.personaService.fnServiceDNI(paramDni).subscribe({
         next: (response: any) => {
 
-          if (response.success = true) {
-          this.formPersona.controls["sNombrePersona"].setValue(response.data.nombre_completo);
+          if (response.success == true) {
+            this.formPersona.controls["sNombrePersona"].setValue(response.data.nombre_completo);
 
             this.formPersona.controls["sApellidoPaterno"].setValue(response.data.apellido_materno);
             this.formPersona.controls["sApellidoMaterno"].setValue(response.data.apellido_paterno);
             this.formPersona.controls["sNombre"].setValue(response.data.nombres);
           }
-
-          console.log(response)
 
         }
       })

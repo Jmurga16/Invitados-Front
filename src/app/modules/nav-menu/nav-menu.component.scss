@@ -1,4 +1,4 @@
-.example-container {
+.container-menu {
     display       : flex;
     flex-direction: column;
     position      : absolute;
@@ -8,20 +8,20 @@
     right         : 0;
 }
 
-.example-is-mobile .example-toolbar {
+.menu-is-mobile .menu-toolbar {
     position: fixed;
     z-index : 2;
 }
 
-h1.example-app-name {
+h1.app-name {
     margin-left: 8px;
 }
 
-.example-sidenav-container {
+.menu-sidenav-container {
     flex: 1;
 }
 
-.example-is-mobile .example-sidenav-container {
+.menu-is-mobile .menu-sidenav-container {
     flex: 1 0 auto;
 }
 
@@ -46,8 +46,16 @@ h1.example-app-name {
     transform: scaleY(1);
 }
 
-.btnCerrarSesion {
+.clsBtnDemo {
     margin-left    : auto;
     color          : white;
     text-decoration: none;
+}
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color: #00c032;
+}
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: #00fd06;
 }

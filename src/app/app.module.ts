@@ -20,23 +20,24 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatExpansionModule } from "@angular/material/expansion";
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 import { NavMenuComponent } from './modules/nav-menu/nav-menu.component';
-import { ListaGraduadosComponent } from './modules/lista-graduados/lista-graduados.component';
 import { ListaInvitadosComponent } from './modules/lista-invitados/lista-invitados.component';
 import { FormInvitadosComponent } from './modules/form-invitados/form-invitados.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { FormQrComponent } from './modules/form-qr/form-qr.component';
+import { MantenimientoComponent } from './modules/mantenimiento/mantenimiento.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent,
-    ListaGraduadosComponent,
+    NavMenuComponent,    
     ListaInvitadosComponent,
     FormInvitadosComponent,
-    FormQrComponent
+    FormQrComponent,
+    MantenimientoComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +60,8 @@ import { FormQrComponent } from './modules/form-qr/form-qr.component';
     ReactiveFormsModule,
     HttpClientModule,
     MatExpansionModule,
-    MatTableExporterModule
+    MatTableExporterModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

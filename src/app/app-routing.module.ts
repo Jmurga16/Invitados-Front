@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormInvitadosComponent } from './modules/form-invitados/form-invitados.component';
-import { ListaGraduadosComponent } from './modules/lista-graduados/lista-graduados.component';
 import { ListaInvitadosComponent } from './modules/lista-invitados/lista-invitados.component';
+import { MantenimientoComponent } from './modules/mantenimiento/mantenimiento.component';
 
 const routes: Routes = [
   {
@@ -19,8 +19,8 @@ const routes: Routes = [
     component: FormInvitadosComponent
   },
   {
-    path: "graduados",
-    component: ListaGraduadosComponent
+    path: "mantenimiento",
+    component: MantenimientoComponent
   }
   /*   ,
     {
