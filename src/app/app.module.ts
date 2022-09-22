@@ -10,7 +10,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -20,24 +20,20 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatExpansionModule } from "@angular/material/expansion";
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { NavMenuComponent } from './modules/nav-menu/nav-menu.component';
 import { ListaInvitadosComponent } from './modules/lista-invitados/lista-invitados.component';
 import { FormInvitadosComponent } from './modules/form-invitados/form-invitados.component';
 import { HttpClientModule } from '@angular/common/http';
-import { MatTableExporterModule } from 'mat-table-exporter';
-import { FormQrComponent } from './modules/form-qr/form-qr.component';
-import { MantenimientoComponent } from './modules/mantenimiento/mantenimiento.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent,    
+    NavMenuComponent,
     ListaInvitadosComponent,
     FormInvitadosComponent,
-    FormQrComponent,
-    MantenimientoComponent
+
   ],
   imports: [
     BrowserModule,
@@ -56,11 +52,10 @@ import { MantenimientoComponent } from './modules/mantenimiento/mantenimiento.co
     MatPaginatorModule,
     MatDialogModule,
     MatMenuModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     MatExpansionModule,
-    MatTableExporterModule,
     MatSlideToggleModule
   ],
   providers: [],

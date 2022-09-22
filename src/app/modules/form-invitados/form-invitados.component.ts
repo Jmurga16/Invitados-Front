@@ -24,7 +24,7 @@ export class FormInvitadosComponent implements OnInit {
   UsuarioValido: boolean = true; //false
 
   modeDemo: boolean = true;
-
+  DniActivo: string = ""
 
   constructor(
     private personaService: PersonaService,
@@ -50,6 +50,7 @@ export class FormInvitadosComponent implements OnInit {
     });
     //#endregion
 
+
   }
 
   ngOnInit(): void {
@@ -61,6 +62,14 @@ export class FormInvitadosComponent implements OnInit {
       this.mobile = false;
     }
 
+
+    this.DniActivo = this.activatedRoute.snapshot.params['dni'];
+
+    if (this.DniActivo != undefined) {
+      this.fnGetDniActive()
+    }
+
+    this.modeDemo = (localStorage.getItem("demo") === 'true');
 
     this.menuService.demo$.subscribe(demo => {
       this.modeDemo = demo;
@@ -118,7 +127,7 @@ export class FormInvitadosComponent implements OnInit {
 
 
     let pParametro = [];
-    let nOpcion = this.nIdPersona == 0 ? 3 : 4; // 3-> Insertar / 4-> Editar
+    let nOpcion = this.DniActivo == undefined ? 3 : 4; // 3-> Insertar / 4-> Editar
 
     pParametro.push(this.formPersona.controls["sDNI"].value);
     pParametro.push(this.formPersona.controls["sApellidoPaterno"].value);
@@ -138,11 +147,17 @@ export class FormInvitadosComponent implements OnInit {
             this.fnExit();
           });
         }
+        else {
+          Swal.fire({
+            title: data.mensaje,
+            icon: 'warning',
+            timer: 5500
+          })
+        }
       },
       error: (e) => {
         console.error(e)
-      },
-      //complete: () => console.info('complete')
+      }
     });
   }
   //#endregion
@@ -214,8 +229,7 @@ export class FormInvitadosComponent implements OnInit {
       },
       error: (e) => {
         console.error(e)
-      },
-      //complete: () => console.info('complete')
+      }
     });
   }
   //#endregion
@@ -247,4 +261,35 @@ export class FormInvitadosComponent implements OnInit {
   }
   //#endregion
 
+
+  //#region Obtener Datos desde Dni
+  async fnGetDniActive() {
+
+    let pParametro = [];
+    let nOpcion = 2
+
+    this.formPersona.controls["sDNI"].setValue(this.DniActivo);
+    pParametro.push(this.DniActivo);
+
+    await this.personaService.fnServicePersona(nOpcion, pParametro).subscribe({
+      next: (data) => {
+        
+        this.formPersona.controls["nIdPersona"].setValue(data[0].nIdPersona);
+        this.formPersona.controls["sNombrePersona"].setValue(data[0].sNombrePersona);
+        this.formPersona.controls["sApellidoPaterno"].setValue(data[0].sApellidoPaterno);
+        this.formPersona.controls["sApellidoMaterno"].setValue(data[0].sApellidoMaterno);
+        this.formPersona.controls["sNombre"].setValue(data[0].sNombre);
+        this.formPersona.controls["bEstado"].setValue(data[0].bEstado);
+
+      },
+      error: (e) => {
+        console.error(e)
+      }
+    });
+
+
+  }
+  //#endregion
+
+  
 }

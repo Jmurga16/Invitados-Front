@@ -18,7 +18,7 @@
                 <div *ngFor="let nav of ListMenu; let index = index">
                     <mat-list-item (click)="nav.subMenu!=null  ? fnShowSubMenu(index)  : fnRouting(nav.route)"
                         class="parent">
-                        <span class="full-width">{{nav.name}}</span>
+                        <span class="full-width"  [ngClass]="{active: nav.route == getRouterURL}">{{nav.name}}</span>
                         <mat-icon mat-list-icon>{{nav.icon}}</mat-icon>
                         <mat-icon class="menu-button" [ngClass]="{rotated : nav.show}" *ngIf="nav.subMenu!=null">
                             expand_more

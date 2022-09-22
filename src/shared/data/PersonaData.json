@@ -1,20 +1,38 @@
 [
     {
         "nIdPersona": 1,
-        "sDNI": "70862638",
-        "sNombrePersona": "GOYA ACUÑA, JUAN CARLOS",
-        "sApellidoPaterno": "GOYA",
-        "sApellidoMaterno": "ACUÑA",
-        "sNombre": "JUAN CARLOS",
+        "sDNI": "22752195",
+        "sNombrePersona": "SALAS CIPRIANO JUAN",
+        "sApellidoPaterno": "SALAS",
+        "sApellidoMaterno": "CIPRIANO",
+        "sNombre": "JUAN",
         "bEstado": true
     },
     {
-        "nIdPersona": 1,
-        "sDNI": "70862638",
-        "sNombrePersona": "GOYA ACUÑA, RANDOLPH ABEL",
-        "sApellidoPaterno": "FUENTES",
-        "sApellidoMaterno": "ZERON",
-        "sNombre": "RANDOLPH ABEL",
+        "nIdPersona": 2,
+        "sDNI": "40803530",
+        "sNombrePersona": "DORREGARAY MORENO JOSE MIGUEL",
+        "sApellidoPaterno": "DORREGARAY",
+        "sApellidoMaterno": "MORENO",
+        "sNombre": "JOSE MIGUEL",
+        "bEstado": true
+    },
+    {
+        "nIdPersona": 3,
+        "sDNI": "44611133",
+        "sNombrePersona": "YARLEQUE LOPEZ LISBETH",
+        "sApellidoPaterno": "YARLEQUE",
+        "sApellidoMaterno": "LOPEZ",
+        "sNombre": "LISBETH",
+        "bEstado": true
+    },
+    {
+        "nIdPersona": 4,
+        "sDNI": "25851081",
+        "sNombrePersona": "PAREDES CESPEDES HILARIO",
+        "sApellidoPaterno": "PAREDES",
+        "sApellidoMaterno": "CESPEDES",
+        "sNombre": "HILARIO",
         "bEstado": true
     }
 ]

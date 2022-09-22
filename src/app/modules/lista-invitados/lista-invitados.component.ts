@@ -5,6 +5,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { PersonaService } from 'src/app/services/persona.service';
+import { TableUtil } from "src/shared/ts/tableUtil";
+import PersonaData from 'src/shared/data/PersonaData.json'
 import Swal from 'sweetalert2';
 
 @Component({
@@ -78,30 +80,99 @@ export class ListaInvitadosComponent implements OnInit {
 
   //#region Listar Invitados
   async fnListInvitados() {
-    let nOpcion = 1
-    let pParametro: any = [];
+    let modeDemo = localStorage.getItem("demo")
 
-    await this.personaService.fnServicePersona(nOpcion, pParametro).subscribe({
-      next: (data) => {
+    if (modeDemo == "false") {
 
-        this.dataSource = new MatTableDataSource(data);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      },
-      error: (e) => {
-        console.error(e)
-      },
-      //complete: () => console.info('complete')
-    });
+      let nOpcion = 1
+      let pParametro: any = [];
+
+      await this.personaService.fnServicePersona(nOpcion, pParametro).subscribe({
+        next: (data) => {
+
+          this.dataSource = new MatTableDataSource(data);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        },
+        error: (e) => {
+          console.error(e)
+        }
+      });
+    }
+    else {
+      this.dataSource = new MatTableDataSource(PersonaData);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+
+    }
   }
   //#endregion
 
-  fnCambiarEstado(idPersona: number, estado: number) {
+
+  //#region Exportar Tabla a Excel
+  exportTable() {
+    TableUtil.exportTableToExcel("MaterialTable", "Lista_Invitados");
+  }
+  //#endregion
+
+
+  //#region Editar
+  fnEditar(dniPersona: number) {
+
+    this.router.navigate(['/', 'invitados', 'editar', dniPersona])
+  }
+  //#endregion
+
+
+  //#region Eliminar/Activar
+  async fnCambiarEstado(idPersona: number, bEstadoDestino: number) {
+
+    let sTitulo, sRespuesta: string = "";
+
+    if (bEstadoDestino == 1) {
+      sTitulo = '¿Desea activar el usuario?'
+      sRespuesta = 'Se activó el usuario con éxito'
+    }
+    else {
+      sTitulo = '¿Desea eliminar el usuario?'
+      sRespuesta = 'Se eliminó el usuario con éxito'
+    }
+
+    var resp = await Swal.fire({
+      title: sTitulo,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar'
+    })
+
+    if (!resp.isConfirmed) {
+      return;
+    }
+
+    let pParametro = [];
+    pParametro.push(idPersona);
+    pParametro.push(bEstadoDestino);
+
+    await this.personaService.fnServicePersona(5, pParametro).subscribe({
+      next: (data) => {
+
+        if (data.cod == 1) {
+          Swal.fire({
+            title: sRespuesta,
+            icon: 'success',
+            timer: 3500
+          })
+        }
+        this.fnListInvitados();
+      },
+      error: (e) => console.error(e)
+    });
+
 
   }
-  fnEditar(idPersona: number, estado: number) {
-
-  }
-
+  //#endregion Eliminar
 
 }
